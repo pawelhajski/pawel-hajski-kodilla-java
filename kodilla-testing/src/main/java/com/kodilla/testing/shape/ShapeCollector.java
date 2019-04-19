@@ -40,5 +40,4 @@ public class ShapeCollector {
     public int getFiguresQuantity() {
         return figures.size();
     }
-
 }

@@ -1,13 +1,17 @@
 package com.kodilla.testing.collection;
 
 import org.junit.*;
+import org.junit.rules.TestName;
+
 import java.util.*;
 
 public class CollectionTestSuite {
+    @Rule
+    public TestName name = new TestName();
 
     @Before
     public void before(){
-        System.out.println("Test Case: begin");
+        System.out.println("Test Case: executing test " + name.getMethodName());
     }
     @After
     public void after(){
