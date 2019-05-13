@@ -2,6 +2,7 @@ package com.kodilla.spring.portfolio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -16,8 +17,15 @@ public class TaskList {
         System.out.println("Adding task: " + task + " to the list.");
     }
 
-    public void getTasks() {
+    public void printTasks() {
         tasks.stream()
                 .forEach(System.out::println);
+    }
+
+    public String getTasks() {
+       String result = tasks.stream()
+                .collect(Collectors.joining(", "));
+
+       return result;
     }
 }

@@ -24,12 +24,17 @@ public class Board {
         doneList.addTask(task);
     }
 
-    public void getAllTasks() {
+    public void printAllTasks() {
         System.out.println("Tasks in to-do-list: ");
-        toDoList.getTasks();
+        toDoList.printTasks();
         System.out.println("Tasks in in-progress-list: ");
-        inProgressList.getTasks();
+        inProgressList.printTasks();
         System.out.println("Tasks in done-list: ");
-        doneList.getTasks();
+        doneList.printTasks();
+    }
+
+    public String getAllTasks() {
+        String result = toDoList.getTasks() + ", " + inProgressList.getTasks() + ", " + doneList.getTasks();
+        return result;
     }
 }
