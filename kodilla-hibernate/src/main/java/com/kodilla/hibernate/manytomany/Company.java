@@ -5,6 +5,11 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Company.retrieveCompaniesBeginningFromTheseThreeDigits",
+        query = "FROM Company WHERE name like :BEGINNING"
+)
+
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
