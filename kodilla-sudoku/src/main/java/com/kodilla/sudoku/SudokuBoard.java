@@ -16,6 +16,7 @@ public class SudokuBoard {
 
     private void generateNumbers3(int numbersAtStart) {
         int elementsInBoard = 0;
+
         while (elementsInBoard < numbersAtStart) {
             Integer randomNumber = randomValue.nextInt(9) + 1;
             int row = randomValue.nextInt(9);
@@ -23,23 +24,27 @@ public class SudokuBoard {
             boolean rowPassed = true;
             boolean columnPassed = true;
 
-            for(int i = 0; i < COLUMNS; i++) {
-                if(sudokuRows.get(row).getSudokuElements().get(i).getValue().equals(randomNumber)) {
-                    rowPassed = false;
-                    break;
-                }
-            }
+            if(sudokuRows.get(row).getSudokuElements().get(column).getValue().equals(0)) {
 
-            for(int i = 0; i < ROWS; i++) {
-                if (sudokuRows.get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
-                    columnPassed = false;
-                    break;
+                for (int i = 0; i < COLUMNS; i++) {
+                    if (sudokuRows.get(row).getSudokuElements().get(i).getValue().equals(randomNumber)) {
+                        rowPassed = false;
+                        break;
+                    }
                 }
-            }
 
-            if(rowPassed && columnPassed) {
-                sudokuRows.get(row).getSudokuElements().get(column).setValue(randomNumber);
-                elementsInBoard++;
+                for (int i = 0; i < ROWS; i++) {
+                    if (sudokuRows.get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
+                        columnPassed = false;
+                        break;
+                    }
+                }
+
+                if (rowPassed && columnPassed) {
+                    sudokuRows.get(row).getSudokuElements().get(column).setValue(randomNumber);
+                    System.out.println("Wiersz: " + row + " Kolumna: " + column + " Wartość: " + sudokuRows.get(row).getSudokuElements().get(column).getValue());
+                    elementsInBoard++;
+                }
             }
         }
     }
