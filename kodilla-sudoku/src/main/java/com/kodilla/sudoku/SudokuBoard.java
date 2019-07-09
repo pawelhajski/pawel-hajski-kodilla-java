@@ -5,48 +5,18 @@ import java.util.stream.IntStream;
 
 public class SudokuBoard {
     private int ROWS = 9;
-    private int COLUMNS = 9;
     private List<SudokuRow> sudokuRows = new ArrayList<>();
-    private Random randomValue = new Random();
 
-    public SudokuBoard(int numbersAtStart) {
+    public SudokuBoard() {
         IntStream.range(0, ROWS).forEach(i -> sudokuRows.add(new SudokuRow()));
-        generateNumbers3(numbersAtStart);
     }
 
-    private void generateNumbers3(int numbersAtStart) {
-        int elementsInBoard = 0;
+    void setElementValue(int row, int column, Integer value) {
+        sudokuRows.get(row).getSudokuElements().get(column).setValue(value);
+    }
 
-        while (elementsInBoard < numbersAtStart) {
-            Integer randomNumber = randomValue.nextInt(9) + 1;
-            int row = randomValue.nextInt(9);
-            int column = randomValue.nextInt(9);
-            boolean rowPassed = true;
-            boolean columnPassed = true;
-
-            if(sudokuRows.get(row).getSudokuElements().get(column).getValue().equals(0)) {
-
-                for (int i = 0; i < COLUMNS; i++) {
-                    if (sudokuRows.get(row).getSudokuElements().get(i).getValue().equals(randomNumber)) {
-                        rowPassed = false;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < ROWS; i++) {
-                    if (sudokuRows.get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
-                        columnPassed = false;
-                        break;
-                    }
-                }
-
-                if (rowPassed && columnPassed) {
-                    sudokuRows.get(row).getSudokuElements().get(column).setValue(randomNumber);
-                    System.out.println("Wiersz: " + row + " Kolumna: " + column + " Wartość: " + sudokuRows.get(row).getSudokuElements().get(column).getValue());
-                    elementsInBoard++;
-                }
-            }
-        }
+    List<SudokuRow> getSudokuRows() {
+        return sudokuRows;
     }
 
     @Override
@@ -75,3 +45,97 @@ public class SudokuBoard {
                 "   -----------------------------------------";
     }
 }
+
+
+
+
+                /*for (int i = 0; i < COLUMNS; i++) {
+                    if (sudokuRows.get(row).getSudokuElements().get(i).getValue().equals(randomNumber)) {
+                        rowPassed = false;
+                        break;
+                    }
+                }*/
+
+                /*for (int i = 0; i < ROWS; i++) {
+                    if (sudokuRows.get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
+                        columnPassed = false;
+                        break;
+                    }
+                }*/
+
+                /*for (int i = squareRowStart; i < squareRowStart + 3; i++) {
+                    for (int j = squareColumnStart; j < squareColumnStart + 3; j++) {
+                        if (sudokuRows.get(i).getSudokuElements().get(j).getValue().equals(randomNumber)) {
+                            squarePassed = false;
+                            break;
+                        }
+                    }
+                }*/
+
+                /*if (rowPassed && columnPassed && squarePassed) {
+                    sudokuRows.get(row).getSudokuElements().get(column).setValue(randomNumber);
+                    elementsInBoard++;
+                    //System.out.println("Wiersz: " + row + " Kolumna: " + column + " Wartość: " + sudokuRows.get(row).getSudokuElements().get(column).getValue());
+                }*/
+
+                /*if (rowPassed && columnPassed && squarePassed) {
+                    setElementValue(row, column, randomNumber);
+                    elementsInBoard++;
+                }*/
+
+                /*private void generateNumbers(int elementsToGenerate) {
+        int elementsInBoard = 0;
+        while (elementsInBoard < elementsToGenerate) {
+            Integer randomNumber = randomValue.nextInt(9) + 1;
+            int row = randomValue.nextInt(ROWS);
+            int column = randomValue.nextInt(COLUMNS);
+            if(sudokuRows.get(row).getSudokuElements().get(column).getValue().equals(EMPTY)) {
+                if (checkIfNumberIsOk(row, column, randomNumber)) {
+                    setElementValue(row, column, randomNumber);
+                    elementsInBoard++;
+                }
+            }
+        }
+    }*/
+
+    /*private boolean checkRowIfDoubles(int row, Integer randomNumber) {
+        boolean rowPassed = true;
+        for(int i = 0; i < ROWS; i++) {
+            if(sudokuRows.get(row).getSudokuElements().get(i).getValue().equals(randomNumber)) {
+                rowPassed = false;
+                break;
+            }
+        } return rowPassed;
+    }
+
+    private boolean checkColumnIfDoubles(int column, Integer randomNumber) {
+        boolean columnPassed = true;
+        for (int i = 0; i < COLUMNS; i++) {
+            if (sudokuRows.get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
+                columnPassed = false;
+                break;
+            }
+        } return columnPassed;
+    }
+
+    private boolean checkBoxIfDoubles(int row, int column, Integer randomNumber) {
+        int boxRowStart = row - row % 3;
+        int boxColumnStart = column - column % 3;
+        boolean boxPassed = true;
+        for (int i = boxRowStart; i < boxRowStart + 3; i++) {
+            for (int j = boxColumnStart; j < boxColumnStart + 3; j++) {
+                if (sudokuRows.get(i).getSudokuElements().get(j).getValue().equals(randomNumber)) {
+                    boxPassed = false;
+                    break;
+                }
+            }
+        } return boxPassed;
+    }
+
+    boolean checkIfNumberIsOk(int row, int column, Integer randomNumber) {
+        if (checkRowIfDoubles(row, randomNumber) && checkColumnIfDoubles(column, randomNumber) && checkBoxIfDoubles(row, column, randomNumber)) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/

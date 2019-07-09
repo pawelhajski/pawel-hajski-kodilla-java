@@ -24,10 +24,6 @@ public class SudokuElement {
         this.value = value;
     }
 
-    public List<Integer> getPossibleValues(){
-        return possibleValues;
-    }
-
     public String printValue() {
         if(value == EMPTY) {
             return " ";
