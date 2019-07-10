@@ -4,19 +4,31 @@ import java.util.Scanner;
 
 public class SudokuScanner {
 
+    private int EMPTY = 0;
+
     private Scanner scanner = new Scanner(System.in);
     private SudokuSolver sudokuSolver = new SudokuSolver();
 
-    void move(SudokuBoard sudokuBoard, int elementsInBoard) {
+    void move(SudokuBoard sudokuBoard) {
         String userInput = scanner.nextLine();
-        int row = Integer.parseInt(userInput.charAt(0)+"") - 1;
-        int column = Integer.parseInt(userInput.charAt(1)+"") - 1;
-        Integer value = Integer.parseInt(userInput.charAt(2)+"");
-        if(validateInput(sudokuBoard, row, column, value)) {
-            sudokuBoard.setElementValue(row, column, value);
-            counter(elementsInBoard, value);
-        } else {
-            System.out.println("Incorrect input.");
+        try {
+            if(userInput.equals("Sudoku")) { //Checks if user input is
+                if(!sudokuSolver.solveSudoku(sudokuBoard)) {//Resolve actual grid if possible or return message that grid is unsolvable.
+                    System.out.println("Sudoku grid unsolvable :/");
+                }
+            } else {
+                int row = Integer.parseInt(userInput.charAt(0) + "") - 1;
+                int column = Integer.parseInt(userInput.charAt(1) + "") - 1;
+                Integer value = Integer.parseInt(userInput.charAt(2) + "");
+                if (validateInput(sudokuBoard, row, column, value)) {
+                    sudokuBoard.setElementValue(row, column, value);
+                    System.out.println("Value: " + value + " has been put into field: [row: " + (row + 1) + "" + "], [column: " + (column + 1) + "].");
+                } else {
+                    System.out.println("Incorrect input.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Incorrect input. Type 3-digit number to place a new value or type \"Sudoku\" to automatically solve grid");
         }
     }
 
@@ -45,12 +57,15 @@ public class SudokuScanner {
 
     }
 
-    public void counter(int elementsInBoard, int value) {
-        if(value != 0) {
-            elementsInBoard++;
-        } else {
-            elementsInBoard--;
-        }
+    public int countElements(SudokuBoard sudokuBoard) {
+        int elements = 0;
+        for(SudokuRow row : sudokuBoard.getSudokuRows()) {
+            for(SudokuElement element : row.getSudokuElements()) {
+                if(element.getValue() != EMPTY) {
+                    elements++;
+                }
+            }
+        } return elements;
     }
 
     public Scanner getScanner() {

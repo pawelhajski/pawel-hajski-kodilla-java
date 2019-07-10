@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 public class SudokuBoard {
     private int ROWS = 9;
+    private int EMPTY = 0;
     private List<SudokuRow> sudokuRows = new ArrayList<>();
 
     public SudokuBoard() {
