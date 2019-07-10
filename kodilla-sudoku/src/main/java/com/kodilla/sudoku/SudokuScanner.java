@@ -20,14 +20,14 @@ public class SudokuScanner {
                 int row = Integer.parseInt(userInput.charAt(0) + "") - 1;
                 int column = Integer.parseInt(userInput.charAt(1) + "") - 1;
                 Integer value = Integer.parseInt(userInput.charAt(2) + "");
-                if (validateInput(sudokuBoard, row, column, value)) {
+                if(validateInput(sudokuBoard, row, column, value)) {
                     sudokuBoard.setElementValue(row, column, value);
                     System.out.println("Value: " + value + " has been put into field: [row: " + (row + 1) + "" + "], [column: " + (column + 1) + "].");
                 } else {
                     System.out.println("Incorrect input.");
                 }
             }
-        } catch (NumberFormatException e) {
+        } catch(NumberFormatException e) {
             System.out.println("Incorrect input. Type 3-digit number to place a new value or type \"Sudoku\" to automatically solve grid");
         }
     }
@@ -36,7 +36,7 @@ public class SudokuScanner {
         if(row > -1 && row < 9) {
             if(column > -1 && column < 9) {
                 if(value > -1 && value < 10) {
-                    if (sudokuSolver.checkIfNumberIsOk(sudokuBoard, row, column, value)) {
+                    if(sudokuSolver.checkIfNumberIsOk(sudokuBoard, row, column, value)) {
                         return true;
                     } else {
                         System.out.println("This value cannot be put here.");

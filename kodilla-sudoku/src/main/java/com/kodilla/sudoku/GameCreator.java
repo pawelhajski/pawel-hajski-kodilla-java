@@ -17,7 +17,7 @@ public class GameCreator {
 
     private void generateNumbers(int elementsToGenerate) {
         int elementsInBoard = 0;
-        while (elementsInBoard < elementsToGenerate) {
+        while(elementsInBoard < elementsToGenerate) {
             Integer randomNumber = randomValue.nextInt(9) + 1;
             int row = randomValue.nextInt(ROWS);
             int column = randomValue.nextInt(COLUMNS);

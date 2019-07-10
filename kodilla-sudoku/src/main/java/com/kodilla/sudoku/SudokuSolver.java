@@ -41,8 +41,8 @@ public class SudokuSolver {
 
     private boolean checkColumnIfDoubles(SudokuBoard sudokuBoard, int column, Integer randomNumber) {
         boolean columnPassed = true;
-        for (int i = 0; i < COLUMNS; i++) {
-            if (sudokuBoard.getSudokuRows().get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
+        for(int i = 0; i < COLUMNS; i++) {
+            if(sudokuBoard.getSudokuRows().get(i).getSudokuElements().get(column).getValue().equals(randomNumber)) {
                 columnPassed = false;
                 break;
             }
@@ -53,9 +53,9 @@ public class SudokuSolver {
         int boxRowStart = row - row % 3;
         int boxColumnStart = column - column % 3;
         boolean boxPassed = true;
-        for (int i = boxRowStart; i < boxRowStart + 3; i++) {
-            for (int j = boxColumnStart; j < boxColumnStart + 3; j++) {
-                if (sudokuBoard.getSudokuRows().get(i).getSudokuElements().get(j).getValue().equals(randomNumber)) {
+        for(int i = boxRowStart; i < boxRowStart + 3; i++) {
+            for(int j = boxColumnStart; j < boxColumnStart + 3; j++) {
+                if(sudokuBoard.getSudokuRows().get(i).getSudokuElements().get(j).getValue().equals(randomNumber)) {
                     boxPassed = false;
                     break;
                 }
@@ -64,7 +64,7 @@ public class SudokuSolver {
     }
 
     boolean checkIfNumberIsOk(SudokuBoard sudokuBoard, int row, int column, Integer randomNumber) {
-        if (checkRowIfDoubles(sudokuBoard, row, randomNumber) && checkColumnIfDoubles(sudokuBoard, column, randomNumber) && checkBoxIfDoubles(sudokuBoard, row, column, randomNumber)) {
+        if(checkRowIfDoubles(sudokuBoard, row, randomNumber) && checkColumnIfDoubles(sudokuBoard, column, randomNumber) && checkBoxIfDoubles(sudokuBoard, row, column, randomNumber)) {
             return true;
         } else {
             return false;
