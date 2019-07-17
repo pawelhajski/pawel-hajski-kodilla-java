@@ -10,6 +10,11 @@ import java.util.List;
         query = "FROM Company WHERE name like :BEGINNING"
 )
 
+@NamedQuery(
+        name = "Company.retrieveCompaniesContainingTheseNameFragment",
+        query = "FROM Company WHERE name like concat ('%', :FRAGMENT, '%')"
+)
+
 @Entity
 @Table(name = "COMPANIES")
 public class Company {

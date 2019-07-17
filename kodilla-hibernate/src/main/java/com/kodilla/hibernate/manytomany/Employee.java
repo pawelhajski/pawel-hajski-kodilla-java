@@ -10,6 +10,11 @@ import java.util.List;
         query = "FROM Employee WHERE lastname = :LASTNAME"
 )
 
+@NamedQuery(
+        name = "Employee.retrieveEmpoyeesWithTheseLastNameFragment",
+        query = "FROM Employee WHERE lastname like concat ('%', :FRAGMENT, '%')"
+)
+
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
