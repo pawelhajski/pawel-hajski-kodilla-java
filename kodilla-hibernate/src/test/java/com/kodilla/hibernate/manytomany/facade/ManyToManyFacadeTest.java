@@ -27,45 +27,45 @@ public class ManyToManyFacadeTest {
     ManyToManyFacade facade;
 
     @Test
-    public void testRetrieveCompaniesByFragmentAndRetrieveEmployeesByFragment() {
+    public void testRetrieveEmployeesByFragment() {
         //Given
         Employee johnSmith = new Employee("John", "Smith");
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
         Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
 
+        employeeDao.save(johnSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+
+        //When
+        List<Employee> lastNameConainsVal = facade.retrieveEmpoyeesWithTheseLastNameFragment("val");
+
+        //Then
+        Assert.assertEquals(1, lastNameConainsVal.size());
+
+        //Cleanup
+        employeeDao.deleteAll();
+    }
+
+    @Test
+    public void testRetrieveComapniesByFragment() {
+        //Given
         Company softwareMachine = new Company("Software Machine");
         Company dataMaesters = new Company("Data Maesters");
         Company greyMatter = new Company("Grey Matter");
 
-        softwareMachine.getEmployees().add(johnSmith);
-        dataMaesters.getEmployees().add(stephanieClarckson);
-        dataMaesters.getEmployees().add(lindaKovalsky);
-        greyMatter.getEmployees().add(johnSmith);
-        greyMatter.getEmployees().add(lindaKovalsky);
-
-        johnSmith.getCompanies().add(softwareMachine);
-        johnSmith.getCompanies().add(greyMatter);
-        stephanieClarckson.getCompanies().add(dataMaesters);
-        lindaKovalsky.getCompanies().add(dataMaesters);
-        lindaKovalsky.getCompanies().add(greyMatter);
-
         companyDao.save(softwareMachine);
-        int softwareMachineId = softwareMachine.getId();
         companyDao.save(dataMaesters);
-        int dataMaestersId = dataMaesters.getId();
         companyDao.save(greyMatter);
-        int greyMatterId = greyMatter.getId();
 
         //When
         List<Company> nameContainsTer = facade.retrieveCompaniesContainingTheseNameFragment("ter");
-        List<Employee> lastNameConainsVal = facade.retrieveEmpoyeesWithTheseLastNameFragment("val");
 
         //Then
         Assert.assertEquals(2, nameContainsTer.size());
-        Assert.assertEquals(1, lastNameConainsVal.size());
 
         //Cleanup
-        //companyDao.deleteAll();
+        companyDao.deleteAll();
     }
 
 }
