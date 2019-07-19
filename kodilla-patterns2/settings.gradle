@@ -4,3 +4,4 @@ pluginManagement {
     }
 }
 rootProject.name = 'kodilla-patterns2'
+include 'kodilla-patterns2'
